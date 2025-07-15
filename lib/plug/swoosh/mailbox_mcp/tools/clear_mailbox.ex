@@ -10,6 +10,6 @@ defmodule Plug.Swoosh.MailboxMCP.Tools.ClearMailbox do
     count = Swoosh.Adapters.Local.Storage.Memory.all() |> length()
     :ok = Swoosh.Adapters.Local.Storage.Memory.delete_all()
 
-    {:ok, %{message: "Mailbox cleared successfully", deleted_count: count}, frame}
+    {:reply, %{message: "Mailbox cleared successfully", deleted_count: count}, frame}
   end
 end

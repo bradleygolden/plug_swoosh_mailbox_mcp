@@ -10,10 +10,10 @@ defmodule Plug.Swoosh.MailboxMCP.Tools.GetEmail do
   def execute(%{id: id}, frame) do
     case Swoosh.Adapters.Local.Storage.Memory.get(id) do
       nil ->
-        {:error, %{message: "Email not found", id: id}}
+        {:error, %Hermes.MCP.Error{code: -32001, message: "Email not found: #{id}"}, frame}
 
       email ->
-        {:ok,
+        {:reply,
          %{
            id: email.headers["Message-ID"],
            from: format_address(email.from),

@@ -10,7 +10,7 @@ defmodule Plug.Swoosh.MailboxMCP.Tools.DeleteEmail do
   def execute(%{id: id}, frame) do
     case Swoosh.Adapters.Local.Storage.Memory.get(id) do
       nil ->
-        {:error, %{message: "Email not found", id: id}}
+        {:error, %Hermes.MCP.Error{code: -32001, message: "Email not found: #{id}"}, frame}
 
       _email ->
         all_emails = Swoosh.Adapters.Local.Storage.Memory.all()
@@ -26,7 +26,7 @@ defmodule Plug.Swoosh.MailboxMCP.Tools.DeleteEmail do
           Swoosh.Adapters.Local.Storage.Memory.push(email)
         end)
 
-        {:ok, %{message: "Email deleted successfully", id: id}, frame}
+        {:reply, %{message: "Email deleted successfully", id: id}, frame}
     end
   end
 end

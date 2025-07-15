@@ -20,7 +20,7 @@ defmodule Plug.Swoosh.MailboxMCP.Tools.ListEmails do
         }
       end)
 
-    {:ok, %{emails: email_summaries, count: length(email_summaries)}, frame}
+    {:reply, %{emails: email_summaries, count: length(email_summaries)}, frame}
   end
 
   defp format_address(nil), do: nil

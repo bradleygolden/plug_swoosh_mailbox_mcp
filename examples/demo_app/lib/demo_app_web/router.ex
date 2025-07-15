@@ -5,6 +5,10 @@ defmodule DemoAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :mcp do
+    plug :accepts, ["json", "text/event-stream"]
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -38,7 +42,7 @@ defmodule DemoAppWeb.Router do
     end
     
     scope "/dev" do
-      pipe_through :api  # Use :api pipeline for MCP JSON requests
+      pipe_through :mcp  # Use :mcp pipeline for MCP JSON and SSE requests
       
       forward "/swoosh_mailbox/mcp", Plug.Swoosh.MailboxMCP
     end

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "swoosh_mailbox": {
+      "command": "mcp-proxy",
+      "args": [
+        "http://localhost:4001/dev/swoosh_mailbox/mcp",
+        "--transport=streamablehttp"
+      ]
+    }
+  }
+}

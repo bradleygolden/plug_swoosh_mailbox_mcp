@@ -72,13 +72,13 @@ Mount the plug in your Phoenix router:
 defmodule YourAppWeb.Router do
   use YourAppWeb, :router
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :mcp do
+    plug :accepts, ["json", "text/event-stream"]
   end
 
   if Mix.env() == :dev do
     scope "/dev" do
-      pipe_through :api requests
+      pipe_through :mcp  # Use :mcp pipeline for JSON and SSE requests
       forward "/swoosh_mailbox/mcp", Plug.Swoosh.MailboxMCP
     end
   end
@@ -86,6 +86,10 @@ end
 ```
 
 Your MCP server will be available at `http://localhost:4000/dev/swoosh_mailbox/mcp`.
+
+### Important: Use MCP Pipeline
+
+**Note:** The MCP server must use a pipeline that accepts both `"json"` and `"text/event-stream"` content types. MCP clients use both JSON for requests and Server-Sent Events (SSE) for streaming responses. Using the `:browser` pipeline or a basic `:api` pipeline will result in a 406 error due to content type mismatch.
 
 ### Using with Swoosh MailboxPreview
 
@@ -101,7 +105,7 @@ if Mix.env() == :dev do
 
   # MCP server (JSON API)
   scope "/dev" do
-    pipe_through :api
+    pipe_through :mcp
     forward "/swoosh_mailbox/mcp", Plug.Swoosh.MailboxMCP
   end
 end

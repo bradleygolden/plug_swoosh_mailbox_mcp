@@ -7,11 +7,14 @@ defmodule Plug.Swoosh.MailboxMCP do
   
   ## Usage
   
-  In your Phoenix router:
+  In your Phoenix router (use :api pipeline for JSON requests):
   
-      forward "/dev/mailbox/mcp", Plug.Swoosh.MailboxMCP
+      scope "/dev" do
+        pipe_through :api
+        forward "/swoosh_mailbox/mcp", Plug.Swoosh.MailboxMCP
+      end
   
-  MCP clients can then connect to http://localhost:4000/dev/mailbox/mcp
+  MCP clients can then connect to http://localhost:4000/dev/swoosh_mailbox/mcp
   """
   
   @behaviour Plug

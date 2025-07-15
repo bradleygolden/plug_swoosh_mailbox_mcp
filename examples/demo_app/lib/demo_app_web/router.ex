@@ -35,7 +35,12 @@ defmodule DemoAppWeb.Router do
       pipe_through :browser
 
       live_dashboard "/dashboard", metrics: DemoAppWeb.Telemetry
-      forward "/mailbox/mcp", Plug.Swoosh.MailboxMCP
+    end
+    
+    scope "/dev" do
+      pipe_through :api  # Use :api pipeline for MCP JSON requests
+      
+      forward "/swoosh_mailbox/mcp", Plug.Swoosh.MailboxMCP
     end
   end
 end

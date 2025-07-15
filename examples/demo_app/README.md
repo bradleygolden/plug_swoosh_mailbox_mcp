@@ -28,13 +28,13 @@ curl -X POST http://localhost:4000/test/send-email
 
 ### 2. Test MCP Tools
 
-The MCP server is available at `http://localhost:4000/dev/mailbox/mcp`.
+The MCP server is available at `http://localhost:4000/dev/swoosh_mailbox/mcp`.
 
 Test the MCP tools with curl:
 
 ```bash
 # List all emails
-curl -X POST http://localhost:4000/dev/mailbox/mcp \
+curl -X POST http://localhost:4000/dev/swoosh_mailbox/mcp \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
@@ -47,7 +47,7 @@ curl -X POST http://localhost:4000/dev/mailbox/mcp \
   }'
 
 # Get a specific email (replace MESSAGE_ID with actual Message-ID)
-curl -X POST http://localhost:4000/dev/mailbox/mcp \
+curl -X POST http://localhost:4000/dev/swoosh_mailbox/mcp \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
@@ -62,7 +62,7 @@ curl -X POST http://localhost:4000/dev/mailbox/mcp \
   }'
 
 # Clear all emails
-curl -X POST http://localhost:4000/dev/mailbox/mcp \
+curl -X POST http://localhost:4000/dev/swoosh_mailbox/mcp \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
@@ -78,7 +78,7 @@ curl -X POST http://localhost:4000/dev/mailbox/mcp \
 ## Features
 
 - ✅ Phoenix app with Swoosh local adapter
-- ✅ MCP server mounted at `/dev/mailbox/mcp`
+- ✅ MCP server mounted at `/dev/swoosh_mailbox/mcp`
 - ✅ Test endpoint to send emails
 - ✅ All 4 MCP tools working: list_emails, get_email, delete_email, clear_mailbox
 - ✅ Uses local library path for testing before publishing

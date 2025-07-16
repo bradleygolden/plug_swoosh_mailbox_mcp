@@ -1,3 +1,5 @@
+After testing this, I found that AI is really good at accessing the swoosh mailbox via web tools like playwright which makes the need for this project far less useful.
+
 # Plug.Swoosh.MailboxMCP
 
 A Plug that exposes Swoosh local mailbox data via the Model Context Protocol (MCP), enabling AI agents to access email data programmatically through HTTP endpoints.
